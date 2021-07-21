@@ -9,10 +9,18 @@ let hungerInterval = null;
 let boredInterval = null;
 let sleepInterval = null;
 let ageInterval = null;
+
+//global variables that do things/write things
 const startButton = document.getElementById("start");
 const feedButton = document.getElementById("feed");
 const playButton = document.getElementById("play");
 const sleepButton = document.getElementById("sleep");
+const header = document.getElementById("welcome-message");
+const displayHunger = document.getElementById("hunger");
+const displayBoredom = document.getElementById("bored");
+const displaySleepiness = document.getElementById("tired")
+const displayAge = document.getElementById("current-age")
+const displayStatus = document.getElementById("status")
 
 //creating global functions
 //prompts user to choose a name
@@ -25,6 +33,12 @@ let newCharacter = null; //have it empty so that after i create a new character,
     //i can assign the new characters value here
 function generateCharacter() {
     newCharacter = new Tamagotchi(chosenName, decideAge, hungerValue, boredomValue, sleepinessValue);
+    header.textContent = `Meow, my name is ${newCharacter.name}, if you'd like to play, hit the start button.`
+    displayHunger.textContent = `Hunger: ${newCharacter.hunger}`;
+    displayBoredom.textContent = `Boredom: ${newCharacter.boredom}`;
+    displaySleepiness.textContent = `Sleepiness: ${newCharacter.sleepiness}`;
+    displayAge.textContent = `Age: ${newCharacter.age}`
+    displayStatus.textContent = `Status: ${characterStatus}`;
     return newCharacter;
 }
 
@@ -42,7 +56,7 @@ function startGame() {
     characterStatus = "Alive"
     hungerInterval = setInterval(function() {
         newCharacter.increaseHunger()
-    }, 4000) //every threethousand seconds my characters hunger increases by 1
+    }, 2000) //every threethousand seconds my characters hunger increases by 1
     //boredInterval = if you get above working, pull in here and change values
     //sleepInterval =
     //ageInterval =
@@ -54,7 +68,7 @@ function hungerDeath() {
     newCharacter.hungerInterval = null;
     newCharacter.hunger = 1;
     characterStatus = "Status: Dead.  I died of starvation.";
-    console.log("Hunger: 10. " + characterStatus)
+    displayStatus.textContent = characterStatus;
     return newCharacter;
 }
 
@@ -76,25 +90,26 @@ class Tamagotchi {
     increaseHunger() { //function that increases my pets hunger
         this.hunger++
         if (this.hunger === 3) {
-            console.log("Hunger: " + this.hunger + ". I want a snack");//will eventually change to display messages
+            displayHunger.textContent = "Hunger: " + this.hunger + ". I want a snack"
         } else if (this.hunger === 6) {
-            console.log("Hunger: " + this.hunger + ". I'm hungry");
+            displayHunger.textContent = "Hunger: " + this.hunger + ". I'm hungry"
         } else if (this.hunger === 8) {
-            console.log("Hunger: " + this.hunger + ". Feed me now");
+            displayHunger.textContent = "Hunger: " + this.hunger + ". Feed me now"
         } else if (this.hunger === 10) {
+            displayHunger.textContent = "Hunger: " + this.hunger
             hungerDeath();
         } else {
-            console.log("Hunger: " + this.hunger)
+            displayHunger.textContent = "Hunger: " + this.hunger
         }
     }
     decreaseHunger() {
        console.log(this.hunger);
        if (this.hunger === 1) {
-        console.log("Don't feed me, I'm full.")
+        displayHunger.textContent = "Don't feed me, I'm full."
         return 
         } else {
         this.hunger--
-        console.log("Hunger: " + this.hunger)
+        displayHunger.textContent = "Hunger: " + this.hunger
         }
     }
 }
