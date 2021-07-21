@@ -56,7 +56,9 @@ function startGame() {
     characterStatus = "Alive"
     hungerInterval = setInterval(function() {
         newCharacter.increaseHunger()
-    }, 2000) //every threethousand seconds my characters hunger increases by 1
+    }, 2000)
+    displayStatus.textContent = "Status: " + characterStatus;
+    //every threethousand seconds my characters hunger increases by 1
     //boredInterval = if you get above working, pull in here and change values
     //sleepInterval =
     //ageInterval =
@@ -69,6 +71,7 @@ function hungerDeath() {
     newCharacter.hunger = 1;
     characterStatus = "Status: Dead.  I died of starvation.";
     displayStatus.textContent = characterStatus;
+    displayHunger.textContent = "Hunger: 10";
     return newCharacter;
 }
 
@@ -105,11 +108,10 @@ class Tamagotchi {
     decreaseHunger() {
        console.log(this.hunger);
        if (this.hunger === 1) {
-        displayHunger.textContent = "Don't feed me, I'm full."
+        displayHunger.textContent = "Hunger: " + newCharacter.hunger + ". Don't feed me, I'm full."
         return 
         } else {
         this.hunger--
-        displayHunger.textContent = "Hunger: " + this.hunger
         }
     }
 }
