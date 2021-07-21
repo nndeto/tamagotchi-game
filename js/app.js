@@ -60,7 +60,7 @@ function hungerDeath() {
 
 //all things related to character revive
 function feedPet() {
-    newCharacter.decreaseHunger;
+    newCharacter.decreaseHunger();
 }
 
 //creating Tamagotchi Class
@@ -88,18 +88,14 @@ class Tamagotchi {
         }
     }
     decreaseHunger() {
-        if (this.hunger === 1) {
-            console.log("Don't feed me, I'm full.")
+       console.log(this.hunger);
+       if (this.hunger === 1) {
+        console.log("Don't feed me, I'm full.")
+        return 
+        } else {
+        this.hunger--
+        console.log("Hunger: " + this.hunger)
         }
-        let number = 1;
-        this.hunger-=number
-        // if (this.hunger-=number < 0) {
-        //     console.log("I'm full!")
-        // } else if (this.hunger-=number === 0) {
-        //     console.log("Just right");
-        // }
-        console.log(this.hunger);
-
     }
 }
 
@@ -108,5 +104,5 @@ window.addEventListener("load", createCharacter);
 startButton.addEventListener("click", startGame);
 feedButton.addEventListener("click", feedPet);
 
-console.log(newCharacter);
+
 
