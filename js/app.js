@@ -8,6 +8,7 @@ let sleepinessValue = 1;
 let hungerInterval = null;
 let boredInterval = null;
 let sleepInterval = null;
+let ageInterval = null;
 const startButton = document.getElementById("start");
 const feedButton = document.getElementById("feed");
 const playButton = document.getElementById("play");
@@ -25,13 +26,12 @@ let newCharacter = null; //have it empty so that after i create a new character,
 function generateCharacter() {
     newCharacter = new Tamagotchi(chosenName, decideAge, hungerValue, boredomValue, sleepinessValue);
     return newCharacter;
-    //newCharacter = instance;
 }
 
 //this allows the user to set a name, sets the character status to alive and creates
 //the new character object
 function createCharacter() {
-    characterStatus = "alive";
+    characterStatus = "Alive";
     pickName();
     generateCharacter();
 }
@@ -39,13 +39,30 @@ function createCharacter() {
 //this function starts my interval timers for the game starting
 //will eventually need to put display messages and whatnot within this function
 function startGame() {
+    characterStatus = "Alive"
     hungerInterval = setInterval(function() {
-        console.log("hello")
         newCharacter.increaseHunger()
-    }, 3000)
+    }, 4000) //every threethousand seconds my characters hunger increases by 1
     //boredInterval = if you get above working, pull in here and change values
     //sleepInterval =
+    //ageInterval =
 }
+
+//All functions related to characer death
+function hungerDeath() {
+    clearInterval(hungerInterval)
+    newCharacter.hungerInterval = null;
+    newCharacter.hunger = 1;
+    characterStatus = "Status: Dead.  I died of starvation.";
+    console.log("Hunger: 10. " + characterStatus)
+    return newCharacter;
+}
+
+//all things related to character revive
+function feedPet() {
+    newCharacter.decreaseHunger;
+}
+
 //creating Tamagotchi Class
 //come back and add methods for: age change, intervals, poiont changes
 class Tamagotchi {
@@ -56,15 +73,40 @@ class Tamagotchi {
         this.boredom = boredom;
         this.sleepiness = sleepiness;
     }
-    increaseHunger() {
+    increaseHunger() { //function that increases my pets hunger
         this.hunger++
-        console.log(this.hunger)
-        //this is where i want my display of hunger to change as well
+        if (this.hunger === 3) {
+            console.log("Hunger: " + this.hunger + ". I want a snack");//will eventually change to display messages
+        } else if (this.hunger === 6) {
+            console.log("Hunger: " + this.hunger + ". I'm hungry");
+        } else if (this.hunger === 8) {
+            console.log("Hunger: " + this.hunger + ". Feed me now");
+        } else if (this.hunger === 10) {
+            hungerDeath();
+        } else {
+            console.log("Hunger: " + this.hunger)
+        }
     }
+    decreaseHunger() {
+        if (this.hunger === 1) {
+            console.log("Don't feed me, I'm full.")
+        }
+        let number = 1;
+        this.hunger-=number
+        // if (this.hunger-=number < 0) {
+        //     console.log("I'm full!")
+        // } else if (this.hunger-=number === 0) {
+        //     console.log("Just right");
+        // }
+        console.log(this.hunger);
 
+    }
 }
 
 //addEventListeners
 window.addEventListener("load", createCharacter);
 startButton.addEventListener("click", startGame);
+feedButton.addEventListener("click", feedPet);
+
+console.log(newCharacter);
 
