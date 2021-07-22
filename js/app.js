@@ -2,9 +2,6 @@
 let characterStatus = "";
 let chosenName = "";
 let decideAge = Math.floor(Math.random()*99);
-let hungerValue = 1;
-let boredomValue = 1;
-let sleepinessValue = 1;
 let hungerInterval = null;
 let boredInterval = null;
 let sleepInterval = null;
@@ -32,7 +29,7 @@ function pickName() {
 let newCharacter = null; //have it empty so that after i create a new character, 
     //i can assign the new characters value here
 function generateCharacter() {
-    newCharacter = new Tamagotchi(chosenName, decideAge, hungerValue, boredomValue, sleepinessValue);
+    newCharacter = new Tamagotchi(chosenName, decideAge, 1, 1, 1);
     header.textContent = `Meow, my name is ${newCharacter.name}, if you'd like to play, hit the start button.`
     return newCharacter;
 }
@@ -45,10 +42,11 @@ function createCharacter() {
 }
 
 //age my character
-//i eventually want a message to alert
+//i eventually want a message to alert birthday
 function ageMe() {
     ageInterval = setInterval(function() {
         newCharacter.age++;
+        alert("Happy Birthday!");
         displayAge.textContent = `Age: ${newCharacter.age}`
     }, 20000)
 }
@@ -56,6 +54,7 @@ function ageMe() {
 //this function starts my interval timers and displays stats
 function startGame() {
     characterStatus = "Alive";
+    resetMe();
     displayStatus.textContent = "Status: " + characterStatus;
     displayHunger.textContent = `Hunger: ${newCharacter.hunger}`;
     displayBoredom.textContent = `Boredom: ${newCharacter.boredom}`;
@@ -67,10 +66,11 @@ function startGame() {
     }, 7000)
     boredInterval = setInterval(function() {
         newCharacter.increaseBoredom();
-    }, 3000)
+    }, 4000)
     sleepInterval = setInterval(function() {
         newCharacter.increaseSleepiness();
     }, 10000)
+    startGameTouch();
 }
 
 //all things related to character revive
@@ -92,12 +92,18 @@ function clearMe() {
     clearInterval(sleepInterval);
     clearInterval(ageInterval);
 }
-//need a check death function, that'll allow other things to be reset
+
+//resets my other properties once a death requires a new game
+function resetMe() {
+    newCharacter.hunger = 1;
+    newCharacter.boredom = 1;
+    newCharacter.sleepiness = 1;
+}
 
 function hungerDeath() {
     clearMe();
+    stopGameTouch();
     newCharacter.hungerInterval = null;
-    newCharacter.hunger = 1;
     characterStatus = "Status: Dead.  I died of starvation.";
     displayStatus.textContent = characterStatus;
     displayHunger.textContent = "Hunger: 10";
@@ -105,8 +111,8 @@ function hungerDeath() {
 }
 function boredDeath() {
     clearMe();
+    stopGameTouch();
     newCharacter.boredInterval = null;
-    newCharacter.boredom = 1;
     characterStatus = "Status: Dead.  I died of boredom.";
     displayStatus.textContent = characterStatus;
     displayBoredom.textContent = "Boredom: 10";
@@ -114,8 +120,8 @@ function boredDeath() {
 }
 function sleepDeath() {
     clearMe();
+    stopGameTouch();
     newCharacter.sleepInterval = null;
-    newCharacter.sleepiness = 1;
     characterStatus = "Status: Dead.  I died of sleep deprivation.";
     displayStatus.textContent = characterStatus;
     displaySleepiness.textContent = "Sleepiness: 10";
@@ -138,7 +144,7 @@ class Tamagotchi {
         } else if (this.hunger === 6) {
             displayHunger.textContent = "Hunger: " + this.hunger + ". I'm hungry."
         } else if (this.hunger === 8) {
-            displayHunger.textContent = "Hunger: " + this.hunger + ". Feed me now."
+            displayHunger.textContent = "Hunger: " + this.hunger + ". Feed me, MEOW!"
         } else if (this.hunger === 10) {
             displayHunger.textContent = "Hunger: " + this.hunger
             hungerDeath();
@@ -171,7 +177,7 @@ class Tamagotchi {
     }
     decreaseBoredom() {
         if (this.boredom === 1) {
-            displayBoredom.textContent = "Boredom: " + newCharacter.boredom + "I don't wanna play right, meow!"
+            displayBoredom.textContent = "Boredom: " + newCharacter.boredom + ". I don't wanna play right, Me-ow!"
             return
         } else {
             this.boredom--
@@ -184,7 +190,7 @@ class Tamagotchi {
         } else if (this.sleepiness === 6) {
             displaySleepiness.textContent = "Sleep: " + this.sleepiness + ". Can I take a nap?"
         } else if (this.sleepiness === 8) {
-            displaySleepiness.textContent = "Sleep: " + this.sleepiness + ". Sleep NOW!"
+            displaySleepiness.textContent = "Sleep: " + this.sleepiness + ". Sleep, me-OW!"
         } else if (this.sleepiness === 10) {
             displaySleepiness.textContent = "Sleep: " + this.sleepiness
             sleepDeath();
@@ -194,7 +200,7 @@ class Tamagotchi {
     }
     decreaseSleepiness() {
         if (this.sleepiness === 1) {
-            displaySleepiness.textContent = "Sleepiness: " + newCharacter.sleepiness + "No, I'm not sleepy!"
+            displaySleepiness.textContent = "Sleepiness: " + newCharacter.sleepiness + " No, I'm not sleepy!"
             return
         } else {
             this.sleepiness--
@@ -205,9 +211,19 @@ class Tamagotchi {
 //addEventListeners
 window.addEventListener("load", createCharacter);
 startButton.addEventListener("click", startGame);
-feedButton.addEventListener("click", feedPet);
-playButton.addEventListener("click", playPet);
-sleepButton.addEventListener("click", sleepPet);
+//i only want these when game play is happening
+function startGameTouch() { 
+    feedButton.addEventListener("click", feedPet);
+    playButton.addEventListener("click", playPet);
+    sleepButton.addEventListener("click", sleepPet);
+};
+//removes event listeners so you can't click buttons once character dies
+function stopGameTouch() {
+    feedButton.removeEventListener("click", feedPet);
+    playButton.removeEventListener("click", playPet);
+    sleepButton.removeEventListener("click", sleepPet);
+};
+
 
 
 

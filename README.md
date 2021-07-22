@@ -15,11 +15,13 @@ The user is the **Player**, who wants to have fun with their Tamagotchi pet.
     *Sleep Button - reduces sleepiness
     *Play Button - reduces boredom
 * Use the buttons to decrease their pet's rising stats
+* Cannot click buttons to decrease stats once their pet dies
 * Receive notifications when their pet has a birthday and watch the age change
 
 
+
 # Wireframes
-![Tamagotchi Mockup](Tamagotchi Mockup.png)
+! [Tamagotchi Mockup](Tamagotchi Mockup.png)
 
 # Triumphs
 # Challenges
