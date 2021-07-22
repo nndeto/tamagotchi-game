@@ -53,8 +53,7 @@ function ageMe() {
     }, 20000)
 }
 
-//this function starts my interval timers for the game starting
-//will eventually need to put display messages and whatnot within this function
+//this function starts my interval timers and displays stats
 function startGame() {
     characterStatus = "Alive";
     displayStatus.textContent = "Status: " + characterStatus;
@@ -65,16 +64,24 @@ function startGame() {
     ageMe();
     hungerInterval = setInterval(function() {
         newCharacter.increaseHunger();
+    }, 4000)
+    boredInterval = setInterval(function() {
+        newCharacter.increaseBoredom();
     }, 2000)
-   
-    //boredInterval = if you get above working, pull in here and change values
-    //sleepInterval =
-    //ageInterval =
+    sleepInterval = setInterval(function() {
+        newCharacter.increaseSleepiness();
+    }, 3000)
 }
 
 //all things related to character revive
 function feedPet() {
     newCharacter.decreaseHunger();
+}
+function playPet() {
+    newCharacter.decreaseBoredom();
+}
+function sleepPet() {
+    newCharacter.decreaseSleepiness();
 }
 
 //All functions related to characer death
@@ -87,6 +94,16 @@ function hungerDeath() {
     displayHunger.textContent = "Hunger: 10";
     return newCharacter;
 }
+function boredDeath() {
+    clearInterval(boredInterval)
+    newCharacter.boredInterval = null;
+    newCharacter.boredom = 1;
+    characterStatus = "Status: Dead.  I died of boredom.";
+    displayStatus.textContent = characterStatus;
+    displayBoredom.textContent = "Boredom: 10";
+    return newCharacter;
+}
+
 
 //creating Tamagotchi Class
 //come back and add methods for: age change, intervals, poiont changes
@@ -122,12 +139,32 @@ class Tamagotchi {
         this.hunger--
         }
     }
+    increaseBoredom() {
+        this.boredom++
+        if (this.boredom === 3) {
+            displayBoredom.textContent = "Boredom: " + this.boredom + ". I'm bored!"
+        } else if (this.boredom === 6) {
+            displayBoredom.textContent = "Boredom: " + this.boredom + ". Play with me!"
+        } else if (this.boredom === 8) {
+            displayBoredom.textContent = "Boredom: " + this.boredom + ". Why won't you play with me!"
+        } else if (this.boredom === 10) {
+            displayBoredom.textContent = "Boredom: " + this.boredom
+            boredDeath();
+        } else {
+            displayBoredom.textContent = "Boredom: " + this.boredom
+        }
+    }
+    increaseSleepiness() {
+
+    }
 }
 
 //addEventListeners
 window.addEventListener("load", createCharacter);
 startButton.addEventListener("click", startGame);
 feedButton.addEventListener("click", feedPet);
+playButton.addEventListener("click", playPet);
+sleepButton.addEventListener("click", sleepPet);
 
 
 
