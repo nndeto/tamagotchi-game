@@ -34,34 +34,47 @@ let newCharacter = null; //have it empty so that after i create a new character,
 function generateCharacter() {
     newCharacter = new Tamagotchi(chosenName, decideAge, hungerValue, boredomValue, sleepinessValue);
     header.textContent = `Meow, my name is ${newCharacter.name}, if you'd like to play, hit the start button.`
-    displayHunger.textContent = `Hunger: ${newCharacter.hunger}`;
-    displayBoredom.textContent = `Boredom: ${newCharacter.boredom}`;
-    displaySleepiness.textContent = `Sleepiness: ${newCharacter.sleepiness}`;
-    displayAge.textContent = `Age: ${newCharacter.age}`
-    displayStatus.textContent = `Status: ${characterStatus}`;
     return newCharacter;
 }
 
 //this allows the user to set a name, sets the character status to alive and creates
 //the new character object
 function createCharacter() {
-    characterStatus = "Alive";
     pickName();
     generateCharacter();
+}
+
+//age my character
+//i eventually want a message to alert
+function ageMe() {
+    ageInterval = setInterval(function() {
+        newCharacter.age++;
+        displayAge.textContent = newCharacter.age
+    }, 20000)
 }
 
 //this function starts my interval timers for the game starting
 //will eventually need to put display messages and whatnot within this function
 function startGame() {
-    characterStatus = "Alive"
-    hungerInterval = setInterval(function() {
-        newCharacter.increaseHunger()
-    }, 2000)
+    characterStatus = "Alive";
     displayStatus.textContent = "Status: " + characterStatus;
-    //every threethousand seconds my characters hunger increases by 1
+    displayHunger.textContent = `Hunger: ${newCharacter.hunger}`;
+    displayBoredom.textContent = `Boredom: ${newCharacter.boredom}`;
+    displaySleepiness.textContent = `Sleepiness: ${newCharacter.sleepiness}`;
+    displayAge.textContent = `Age: ${newCharacter.age}`
+    ageMe();
+    hungerInterval = setInterval(function() {
+        newCharacter.increaseHunger();
+    }, 2000)
+   
     //boredInterval = if you get above working, pull in here and change values
     //sleepInterval =
     //ageInterval =
+}
+
+//all things related to character revive
+function feedPet() {
+    newCharacter.decreaseHunger();
 }
 
 //All functions related to characer death
@@ -73,11 +86,6 @@ function hungerDeath() {
     displayStatus.textContent = characterStatus;
     displayHunger.textContent = "Hunger: 10";
     return newCharacter;
-}
-
-//all things related to character revive
-function feedPet() {
-    newCharacter.decreaseHunger();
 }
 
 //creating Tamagotchi Class
