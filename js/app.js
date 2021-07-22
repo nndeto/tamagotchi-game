@@ -103,6 +103,15 @@ function boredDeath() {
     displayBoredom.textContent = "Boredom: 10";
     return newCharacter;
 }
+function sleepDeath() {
+    clearInterval(sleepInterval)
+    newCharacter.sleepInterval = null;
+    newCharacter.sleepiness = 1;
+    characterStatus = "Status: Dead.  I died of sleep deprivation.";
+    displayStatus.textContent = characterStatus;
+    displaySleepiness.textContent = "Sleepiness: 10";
+    return newCharacter;
+}
 
 
 //creating Tamagotchi Class
@@ -118,11 +127,11 @@ class Tamagotchi {
     increaseHunger() { //function that increases my pets hunger
         this.hunger++
         if (this.hunger === 3) {
-            displayHunger.textContent = "Hunger: " + this.hunger + ". I want a snack"
+            displayHunger.textContent = "Hunger: " + this.hunger + ". I want a snack."
         } else if (this.hunger === 6) {
-            displayHunger.textContent = "Hunger: " + this.hunger + ". I'm hungry"
+            displayHunger.textContent = "Hunger: " + this.hunger + ". I'm hungry."
         } else if (this.hunger === 8) {
-            displayHunger.textContent = "Hunger: " + this.hunger + ". Feed me now"
+            displayHunger.textContent = "Hunger: " + this.hunger + ". Feed me now."
         } else if (this.hunger === 10) {
             displayHunger.textContent = "Hunger: " + this.hunger
             hungerDeath();
@@ -155,7 +164,19 @@ class Tamagotchi {
         }
     }
     increaseSleepiness() {
-
+        this.sleepiness++
+        if (this.sleepiness === 3) {
+            displaySleepiness.textContent = "Sleep: " + this.sleepiness + ". I'm sleepy!"
+        } else if (this.sleepiness === 6) {
+            displaySleepiness.textContent = "Sleep: " + this.sleepiness + ". Can I take a nap?"
+        } else if (this.sleepiness === 8) {
+            displaySleepiness.textContent = "Sleep: " + this.sleepiness + ". Sleep NOW!"
+        } else if (this.sleepiness === 10) {
+            displaySleepiness.textContent = "Sleep: " + this.sleepiness
+            sleepDeath();
+        } else {
+            displaySleepiness.textContent = "Sleep: " + this.sleepiness
+        }
     }
 }
 
