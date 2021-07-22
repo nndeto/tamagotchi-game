@@ -49,7 +49,7 @@ function createCharacter() {
 function ageMe() {
     ageInterval = setInterval(function() {
         newCharacter.age++;
-        displayAge.textContent = newCharacter.age
+        displayAge.textContent = `Age: ${newCharacter.age}`
     }, 20000)
 }
 
@@ -64,13 +64,13 @@ function startGame() {
     ageMe();
     hungerInterval = setInterval(function() {
         newCharacter.increaseHunger();
-    }, 4000)
+    }, 7000)
     boredInterval = setInterval(function() {
         newCharacter.increaseBoredom();
-    }, 2000)
+    }, 3000)
     sleepInterval = setInterval(function() {
         newCharacter.increaseSleepiness();
-    }, 3000)
+    }, 10000)
 }
 
 //all things related to character revive
@@ -85,8 +85,17 @@ function sleepPet() {
 }
 
 //All functions related to characer death
-function hungerDeath() {
+//drier code that stops all intervals once a character dies
+function clearMe() {
     clearInterval(hungerInterval)
+    clearInterval(boredInterval);
+    clearInterval(sleepInterval);
+    clearInterval(ageInterval);
+}
+//need a check death function, that'll allow other things to be reset
+
+function hungerDeath() {
+    clearMe();
     newCharacter.hungerInterval = null;
     newCharacter.hunger = 1;
     characterStatus = "Status: Dead.  I died of starvation.";
@@ -95,7 +104,7 @@ function hungerDeath() {
     return newCharacter;
 }
 function boredDeath() {
-    clearInterval(boredInterval)
+    clearMe();
     newCharacter.boredInterval = null;
     newCharacter.boredom = 1;
     characterStatus = "Status: Dead.  I died of boredom.";
@@ -104,7 +113,7 @@ function boredDeath() {
     return newCharacter;
 }
 function sleepDeath() {
-    clearInterval(sleepInterval)
+    clearMe();
     newCharacter.sleepInterval = null;
     newCharacter.sleepiness = 1;
     characterStatus = "Status: Dead.  I died of sleep deprivation.";
@@ -113,9 +122,7 @@ function sleepDeath() {
     return newCharacter;
 }
 
-
 //creating Tamagotchi Class
-//come back and add methods for: age change, intervals, poiont changes
 class Tamagotchi {
     constructor(name, age, hunger, boredom, sleepiness) {
         this.name = name;
@@ -140,7 +147,6 @@ class Tamagotchi {
         }
     }
     decreaseHunger() {
-       console.log(this.hunger);
        if (this.hunger === 1) {
         displayHunger.textContent = "Hunger: " + newCharacter.hunger + ". Don't feed me, I'm full."
         return 
@@ -163,6 +169,14 @@ class Tamagotchi {
             displayBoredom.textContent = "Boredom: " + this.boredom
         }
     }
+    decreaseBoredom() {
+        if (this.boredom === 1) {
+            displayBoredom.textContent = "Boredom: " + newCharacter.boredom + "I don't wanna play right, meow!"
+            return
+        } else {
+            this.boredom--
+        }
+    }
     increaseSleepiness() {
         this.sleepiness++
         if (this.sleepiness === 3) {
@@ -176,6 +190,14 @@ class Tamagotchi {
             sleepDeath();
         } else {
             displaySleepiness.textContent = "Sleep: " + this.sleepiness
+        }
+    }
+    decreaseSleepiness() {
+        if (this.sleepiness === 1) {
+            displaySleepiness.textContent = "Sleepiness: " + newCharacter.sleepiness + "No, I'm not sleepy!"
+            return
+        } else {
+            this.sleepiness--
         }
     }
 }
