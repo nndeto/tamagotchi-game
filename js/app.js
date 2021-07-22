@@ -158,6 +158,7 @@ class Tamagotchi {
         return 
         } else {
         this.hunger--
+        displayHunger.textContent = "Hunger: " + this.hunger
         }
     }
     increaseBoredom() {
@@ -181,6 +182,7 @@ class Tamagotchi {
             return
         } else {
             this.boredom--
+            displayBoredom.textContent = "Boredom: " + this.boredom
         }
     }
     increaseSleepiness() {
@@ -204,6 +206,7 @@ class Tamagotchi {
             return
         } else {
             this.sleepiness--
+            displaySleepiness.textContent = "Sleepiness: " + this.sleepiness
         }
     }
 }
