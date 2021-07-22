@@ -1,5 +1,54 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Codystar&family=Monofett&family=Montserrat&display=swap');
+
+body {
+    font-family: 'Codystar';
+    font-size: 1.2rem;
+}
+
 h1 {
     text-align: center;
-    
+    font-family: 'Monofett';
+}
+
+#start {
+    padding: 15px 80px 15px 80px;
+    margin: 30px;
+    font-family: "Codystar";
+    font-size: 2.5rem;
+    color: #1A4173;
+    background: #F9E29E;
+    border: 6px inset #DBC8DB;
+    border-radius: 15px;
+}
+
+#feed {
+    padding: 15px;
+    margin: 5px;
+    font-family: "Codystar";
+    font-size: 1rem;
+    color: #1A4173;
+    background: #F9E29E;
+    border: 6px inset #DBC8DB;
+    border-radius: 15px;
+}
+#play {
+    padding: 15px;
+    margin: 5px;
+    font-family: "Codystar";
+    font-size: 1rem;
+    color: #1A4173;
+    background: #F9E29E;
+    border: 6px inset #DBC8DB;
+    border-radius: 15px;
+}
+#sleep {
+    padding: 15px;
+    margin: 5px;
+    font-family: "Codystar";
+    font-size: 1rem;
+    color: #1A4173;
+    background: #F9E29E;
+    border: 6px inset #DBC8DB;
+    border-radius: 15px;
 }
