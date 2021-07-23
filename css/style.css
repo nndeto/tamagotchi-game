@@ -3,16 +3,65 @@
 
 body {
     font-family: 'Codystar';
-    font-size: 1.2rem;
+    background-image: url("/img/qxsdxwsr8pd41.jpeg");
+    background-repeat: none;
+    background-size: cover;
 }
 
 h1 {
     text-align: center;
     font-family: 'Monofett';
+    font-weight: bold;
+    color: #1A4173;
+    font-size: 2.6rem;
+}
+
+.stats {
+    float: right;
+    position: relative;
+    right: 10px;
+    top: 160px;
+    padding: 10px;
+    background-color: #D4B0D9;
+    font-weight: bold;
+}
+
+.tamagotchi-body {
+    height: 700px;
+    width: 500px;
+    background: #1a4173;
+    border-radius: 50%;
+    border: 8px ridge #F9E29E;
+    position: relative;
+    margin: 0 auto;
+}
+
+.tamagotchi-screen {
+    height: 200px;
+    width: 400px;
+    background-color: #A9BED9;
+    background-image: url("/img/main-face.png");
+    background-size: fill;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 20%;
+    position: relative;
+    margin: 0 auto;
+    top: 140px;
+}
+
+.tamagotchi-screen:hover {
+    transform: rotateX(180deg);
+}
+
+.game-buttons {
+   position: absolute;
+   bottom: 90px;
+   left: 80px;
 }
 
 #start {
-    padding: 15px 80px 15px 80px;
+    padding: 15px 40px 15px 40px;
     margin: 30px;
     font-family: "Codystar";
     font-size: 2.5rem;
@@ -20,35 +69,28 @@ h1 {
     background: #F9E29E;
     border: 6px inset #DBC8DB;
     border-radius: 15px;
+    position: absolute;
+    bottom: 20px;
+    right: 5px;
+}
+
+#play, #feed, #sleep {
+    padding: 15px;
+    margin: 10px;
+    font-family: "Codystar";
+    font-size: 1.2rem;
+    color: #1A4173;
+    background: #F9E29E;
+    border: 6px inset #DBC8DB;
+    border-radius: 15px;
+}
+
+#sleep {
+    position: absolute;
+    bottom: 80px;
 }
 
 #feed {
-    padding: 15px;
-    margin: 5px;
-    font-family: "Codystar";
-    font-size: 1rem;
-    color: #1A4173;
-    background: #F9E29E;
-    border: 6px inset #DBC8DB;
-    border-radius: 15px;
-}
-#play {
-    padding: 15px;
-    margin: 5px;
-    font-family: "Codystar";
-    font-size: 1rem;
-    color: #1A4173;
-    background: #F9E29E;
-    border: 6px inset #DBC8DB;
-    border-radius: 15px;
-}
-#sleep {
-    padding: 15px;
-    margin: 5px;
-    font-family: "Codystar";
-    font-size: 1rem;
-    color: #1A4173;
-    background: #F9E29E;
-    border: 6px inset #DBC8DB;
-    border-radius: 15px;
-}
+    position: relative;
+    bottom: 80px;
+} 
