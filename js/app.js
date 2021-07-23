@@ -15,9 +15,10 @@ const sleepButton = document.getElementById("sleep");
 const header = document.getElementById("welcome-message");
 const displayHunger = document.getElementById("hunger");
 const displayBoredom = document.getElementById("bored");
-const displaySleepiness = document.getElementById("tired")
-const displayAge = document.getElementById("current-age")
-const displayStatus = document.getElementById("status")
+const displaySleepiness = document.getElementById("tired");
+const displayAge = document.getElementById("current-age");
+const displayStatus = document.getElementById("status");
+const imageChange = document.querySelector(".tamagotchi-screen");
 
 //creating global functions
 //prompts user to choose a name
@@ -53,6 +54,7 @@ function ageMe() {
 
 //this function starts my interval timers and displays stats
 function startGame() {
+    imageChange.style.backgroundImage = "url(/img/main-face.png)";
     characterStatus = "Alive";
     resetMe();
     displayStatus.textContent = "Status: " + characterStatus;
@@ -63,13 +65,13 @@ function startGame() {
     ageMe();
     hungerInterval = setInterval(function() {
         newCharacter.increaseHunger();
-    }, 7000)
+    }, 3000)
     boredInterval = setInterval(function() {
         newCharacter.increaseBoredom();
-    }, 4000)
+    }, 6000)
     sleepInterval = setInterval(function() {
         newCharacter.increaseSleepiness();
-    }, 10000)
+    }, 8000)
     startGameTouch();
 }
 
@@ -101,6 +103,7 @@ function resetMe() {
 }
 
 function hungerDeath() {
+    imageChange.style.backgroundImage = "url(/img/died-two.jpeg)";
     clearMe();
     stopGameTouch();
     newCharacter.hungerInterval = null;
@@ -110,6 +113,7 @@ function hungerDeath() {
     return newCharacter;
 }
 function boredDeath() {
+    imageChange.style.backgroundImage = "url(/img/died-two.jpeg)";
     clearMe();
     stopGameTouch();
     newCharacter.boredInterval = null;
@@ -119,6 +123,7 @@ function boredDeath() {
     return newCharacter;
 }
 function sleepDeath() {
+    imageChange.style.backgroundImage = "url(/img/died-two.jpeg)";
     clearMe();
     stopGameTouch();
     newCharacter.sleepInterval = null;
@@ -137,7 +142,8 @@ class Tamagotchi {
         this.boredom = boredom;
         this.sleepiness = sleepiness;
     }
-    increaseHunger() { //function that increases my pets hunger
+    increaseHunger() { 
+        imageChange.style.backgroundImage = "url(/img/main-face.png)";
         this.hunger++
         if (this.hunger === 3) {
             displayHunger.textContent = "Hunger: " + this.hunger + ". I want a snack."
@@ -158,10 +164,12 @@ class Tamagotchi {
         return 
         } else {
         this.hunger--
+        imageChange.style.backgroundImage = "url(/img/luna-eating.jpeg)";
         displayHunger.textContent = "Hunger: " + this.hunger
         }
     }
     increaseBoredom() {
+        imageChange.style.backgroundImage = "url(/img/main-face.png)";
         this.boredom++
         if (this.boredom === 3) {
             displayBoredom.textContent = "Boredom: " + this.boredom + ". I'm bored!"
@@ -182,10 +190,12 @@ class Tamagotchi {
             return
         } else {
             this.boredom--
+            imageChange.style.backgroundImage = "url(/img/luna-playing.jpeg)";
             displayBoredom.textContent = "Boredom: " + this.boredom
         }
     }
     increaseSleepiness() {
+        imageChange.style.backgroundImage = "url(/img/main-face.png)";
         this.sleepiness++
         if (this.sleepiness === 3) {
             displaySleepiness.textContent = "Sleep: " + this.sleepiness + ". I'm sleepy!"
@@ -206,6 +216,7 @@ class Tamagotchi {
             return
         } else {
             this.sleepiness--
+            imageChange.style.backgroundImage = "url(/img/luna-sleeping.jpeg)";
             displaySleepiness.textContent = "Sleepiness: " + this.sleepiness
         }
     }
@@ -227,6 +238,14 @@ function stopGameTouch() {
     sleepButton.removeEventListener("click", sleepPet);
 };
 
-
-
+///Working out
+imageChange.style.backgroundImage = "url(/img/luna-eating.jpeg)";
+imageChange.style.backgroundImage = "url(/img/luna-playing.jpeg)";
+imageChange.style.backgroundImage = "url(/img/luna-sleeping.jpeg)";
+imageChange.style.backgroundImage = "url(/img/img/died-one.jpeg)";
+imageChange.style.backgroundImage = "url(/img/died-two.jpeg)";
+imageChange.style.backgroundImage = "url(/img/main-face.png)";
+//imageChange.style.backgroundImage = "url(/img/luna-food-mad.jpeg)";
+//imageChange.style.backgroundImage = "url(/img/luna-sleep-mad.jpeg)";
+// imageChange.style.backgroundImage = "url(/img/luna-bored-mad.jpeg)";
 

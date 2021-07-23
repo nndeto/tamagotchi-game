@@ -94,3 +94,11 @@ h1 {
     position: relative;
     bottom: 80px;
 } 
+
+@media screen and (max-width: 1300px) {
+    #start {
+        padding: 10px;
+        position:static;
+        margin: 1% 40%;
+    }
+}
