@@ -19,6 +19,9 @@ const displaySleepiness = document.getElementById("tired");
 const displayAge = document.getElementById("current-age");
 const displayStatus = document.getElementById("status");
 const imageChange = document.querySelector(".tamagotchi-screen");
+const speech = document.querySelector(".speech-bubble");
+const gameVis = document.querySelector(".tamagotchi-body");
+const gameStatsVis = document.querySelector(".stats");
 
 //creating global functions
 //prompts user to choose a name
@@ -28,10 +31,13 @@ function pickName() {
 
 //creates new character class
 let newCharacter = null; //have it empty so that after i create a new character, 
-    //i can assign the new characters value here
+//assigns the new characters value here
 function generateCharacter() {
+    gameVis.classList.add("hidden");
+    gameStatsVis.classList.add("hidden");
     newCharacter = new Tamagotchi(chosenName, decideAge, 1, 1, 1);
-    header.textContent = `Meow, my name is ${newCharacter.name}, if you'd like to play, hit the start button.`
+    header.textContent = `Meow, my name is ${newCharacter.name}!`
+    speech.textContent = "If you'd like to play, hit the start button!"
     return newCharacter;
 }
 
@@ -47,13 +53,15 @@ function createCharacter() {
 function ageMe() {
     ageInterval = setInterval(function() {
         newCharacter.age++;
-        alert("Happy Birthday!");
+        speech.textContent = "Happy Birthday!"
         displayAge.textContent = `Age: ${newCharacter.age}`
     }, 20000)
 }
 
 //this function starts my interval timers and displays stats
 function startGame() {
+    gameVis.classList.remove("hidden");
+    gameStatsVis.classList.remove("hidden");
     imageChange.style.backgroundImage = "url(/img/main-face.png)";
     characterStatus = "Alive";
     resetMe();
@@ -110,6 +118,7 @@ function hungerDeath() {
     characterStatus = "Status: Dead.  I died of starvation.";
     displayStatus.textContent = characterStatus;
     displayHunger.textContent = "Hunger: 10";
+    speech.textContent = "If you'd like to play again, press the start button!";
     return newCharacter;
 }
 function boredDeath() {
@@ -120,6 +129,7 @@ function boredDeath() {
     characterStatus = "Status: Dead.  I died of boredom.";
     displayStatus.textContent = characterStatus;
     displayBoredom.textContent = "Boredom: 10";
+    speech.textContent = "If you'd like to play again, press the start button!";
     return newCharacter;
 }
 function sleepDeath() {
@@ -130,6 +140,7 @@ function sleepDeath() {
     characterStatus = "Status: Dead.  I died of sleep deprivation.";
     displayStatus.textContent = characterStatus;
     displaySleepiness.textContent = "Sleepiness: 10";
+    speech.textContent = "If you'd like to play again, press the start button!";
     return newCharacter;
 }
 
