@@ -31,9 +31,10 @@ imageChange.style.backgroundImage = "url(/img/luna-sleeping.jpeg)";
 imageChange.style.backgroundImage = "url(/img/img/died-one.jpeg)";
 imageChange.style.backgroundImage = "url(/img/died-two.jpeg)";
 imageChange.style.backgroundImage = "url(/img/main-face.png)";
-//imageChange.style.backgroundImage = "url(/img/luna-food-mad.jpeg)";
-//imageChange.style.backgroundImage = "url(/img/luna-sleep-mad.jpeg)";
-// imageChange.style.backgroundImage = "url(/img/luna-bored-mad.jpeg)";
+imageChange.style.backgroundImage = "url(/img/luna-food-mad.jpeg)";
+imageChange.style.backgroundImage = "url(/img/luna-sleep-mad.jpeg)";
+imageChange.style.backgroundImage = "url(/img/luna-bored-mad.jpeg)";
+
 
 
 
@@ -67,7 +68,7 @@ function ageMe() {
         newCharacter.age++;
         speech.textContent = dynamicContent.messages.happyBdayMessage;
         displayAge.textContent = `Age: ${newCharacter.age}`
-    }, 20000)
+    }, 17000)
 }
 
 function startMessages() {
@@ -101,13 +102,20 @@ function startGame() {
     startGameTouch();
     hungerInterval = setInterval(function() {
         newCharacter.increaseHunger();
-    }, 4000)
+    }, 5000)
     boredInterval = setInterval(function() {
         newCharacter.increaseBoredom();
     }, 8000)
     sleepInterval = setInterval(function() {
         newCharacter.increaseSleepiness();
-    }, 12000)
+    }, 11000)
+}
+
+//resets my other properties once a death requires a new game
+function resetMe() {
+    newCharacter.hunger = 1;
+    newCharacter.boredom = 1;
+    newCharacter.sleepiness = 1;
 }
 
 //all things related to character revive
@@ -128,13 +136,6 @@ function clearMe() {
     clearInterval(boredInterval);
     clearInterval(sleepInterval);
     clearInterval(ageInterval);
-}
-
-//resets my other properties once a death requires a new game
-function resetMe() {
-    newCharacter.hunger = 1;
-    newCharacter.boredom = 1;
-    newCharacter.sleepiness = 1;
 }
 
 function hungerDeath() {
@@ -182,7 +183,7 @@ class Tamagotchi {
     }
     increaseHunger() { 
         imageChange.style.backgroundImage = "url(/img/main-face.png)";
-        speech.textContent = dynamicContent.messages.staticMessage;
+        speech.textContent = dynamicContent.messages.midGameMessage;
         this.hunger++
         if (this.hunger === 3) {
             displayHunger.textContent = "Hunger: " + this.hunger 
@@ -203,6 +204,7 @@ class Tamagotchi {
     decreaseHunger() {
        if (this.hunger === 1) {
         speech.textContent = dynamicContent.messages.hungerMessageFour;
+        imageChange.style.backgroundImage = "url(/img/luna-food-mad.jpeg)";
         return 
         } else {
         this.hunger--
@@ -211,7 +213,7 @@ class Tamagotchi {
         }
     }
     increaseBoredom() {
-        speech.textContent = dynamicContent.messages.staticMessage;
+        speech.textContent = dynamicContent.messages.midGameMessage;
         imageChange.style.backgroundImage = "url(/img/main-face.png)";
         this.boredom++
         if (this.boredom === 3) {
@@ -233,6 +235,7 @@ class Tamagotchi {
     decreaseBoredom() {
         if (this.boredom === 1) {
             speech.textContent = dynamicContent.messages.boredMessageFour;
+            imageChange.style.backgroundImage = "url(/img/luna-bored-mad.jpeg)";
             return
         } else {
             this.boredom--
@@ -241,7 +244,7 @@ class Tamagotchi {
         }
     }
     increaseSleepiness() {
-        speech.textContent = dynamicContent.messages.staticMessage;
+        speech.textContent = dynamicContent.messages.midGameMessage;
         imageChange.style.backgroundImage = "url(/img/main-face.png)";
         this.sleepiness++
         if (this.sleepiness === 3) {
@@ -263,6 +266,7 @@ class Tamagotchi {
     decreaseSleepiness() {
         if (this.sleepiness === 1) {
             speech.textContent = dynamicContent.messages.sleepMessageFour;
+            imageChange.style.backgroundImage = "url(/img/luna-sleep-mad.jpeg)";
             return
         } else {
             this.sleepiness--
@@ -292,6 +296,7 @@ function stopGameTouch() {
 let dynamicContent = {
     messages: {
         staticMessage: "Hi! I'm Sailor Moon! I'll be your tamagotchi translator!",
+        midGameMessage: "...",
         playMessage: "If you'd like to play, hit the start button!",
         playAgainMessage: "If you'd like to play again, press the start button!",
         hDeathMessage: "You starved me!",
@@ -299,7 +304,7 @@ let dynamicContent = {
         sDeathMessage: "Why didn't you let me sleep?",
         deathStatus: "Status: Dead",
         aliveStatus: "Status: Alive",
-        happyBdayMessage: "Happy Birthday!",
+        happyBdayMessage: "Wow, it's already been a year!!! Happy Birthday!",
         hungerMessageOne: "I want a snack.",
         hungerMessageTwo: "I'm really hungry.",
         hungerMessageThree: "Feed me, MEOW!",
