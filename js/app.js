@@ -6,6 +6,7 @@ let hungerInterval = null;
 let boredInterval = null;
 let sleepInterval = null;
 let ageInterval = null;
+let loveInterval = null;
 
 //global variables that do things/write things
 const startButton = document.getElementById("start");
@@ -18,6 +19,7 @@ const displayBoredom = document.getElementById("bored");
 const displaySleepiness = document.getElementById("tired");
 const displayAge = document.getElementById("current-age");
 const displayStatus = document.getElementById("status");
+const displayLove = document.getElementById("love");
 const imageChange = document.querySelector(".tamagotchi-screen");
 const speech = document.querySelector(".speech-bubble");
 const gameVis = document.querySelector(".tamagotchi-body");
@@ -34,9 +36,8 @@ imageChange.style.backgroundImage = "url(/img/main-face.png)";
 imageChange.style.backgroundImage = "url(/img/luna-food-mad.jpeg)";
 imageChange.style.backgroundImage = "url(/img/luna-sleep-mad.jpeg)";
 imageChange.style.backgroundImage = "url(/img/luna-bored-mad.jpeg)";
-
-
-
+imageChange.style.backgroundImage = "url(/img/luna-and-artemis.jpeg)";
+imageChange.style.backgroundImage = "url(/img/final-love-end.jpeg)";
 
 //creating global functions
 //prompts user to choose a name
@@ -48,6 +49,7 @@ function pickName() {
 function createCharacter() {
     pickName();
     generateCharacter();
+    startButtonLive();
 }
 
 //creates new character class
@@ -55,7 +57,7 @@ let newCharacter = null; //have it empty so that after i create a new character,
 //assigns the new characters value here
 function generateCharacter() {
     hideGame();
-    newCharacter = new Tamagotchi(chosenName, decideAge, 1, 1, 1);
+    newCharacter = new Tamagotchi(chosenName, decideAge, 1, 1, 1, 1);
     header.textContent = `Meow, my name is ${newCharacter.name}!`
     speech.textContent = dynamicContent.messages.playMessage;
     return newCharacter;
@@ -75,6 +77,7 @@ function startMessages() {
     displayHunger.textContent = `Hunger: ${newCharacter.hunger}`;
     displayBoredom.textContent = `Boredom: ${newCharacter.boredom}`;
     displaySleepiness.textContent = `Sleepiness: ${newCharacter.sleepiness}`;
+    displayLove.textContent = `Love: ${newCharacter.love}`;
     displayAge.textContent = `Age: ${newCharacter.age}`
 }
 
@@ -99,6 +102,7 @@ function startGame() {
     startMessages();
     ageMe();
     startGameTouch();
+    startButtonDead();
     hungerInterval = setInterval(function() {
         newCharacter.increaseHunger();
     }, 5000)
@@ -108,6 +112,9 @@ function startGame() {
     sleepInterval = setInterval(function() {
         newCharacter.increaseSleepiness();
     }, 11000)
+    loveInterval = setInterval(function() {
+        newCharacter.increaseLove();
+    }, 19000)
 }
 
 //resets my other properties once a death requires a new game
@@ -115,6 +122,7 @@ function resetMe() {
     newCharacter.hunger = 1;
     newCharacter.boredom = 1;
     newCharacter.sleepiness = 1;
+    newCharacter.love = 1;
 }
 
 //all things related to character revive
@@ -135,50 +143,69 @@ function clearMe() {
     clearInterval(boredInterval);
     clearInterval(sleepInterval);
     clearInterval(ageInterval);
+    clearInterval(loveInterval);
 }
 
 function hungerDeath() {
     imageChange.style.backgroundImage = "url(/img/died-two.jpeg)";
     clearMe();
     stopGameTouch();
+    startButtonLive();
     newCharacter.hungerInterval = null;
     displayHunger.textContent = "Hunger: 10";
     displayStatus.textContent = dynamicContent.messages.deathStatus
     speech.textContent = dynamicContent.messages.hDeathMessage;
     header.textContent = dynamicContent.messages.playAgainMessage;
-    return newCharacter;
+    return newCharacter
 }
 function boredDeath() {
     imageChange.style.backgroundImage = "url(/img/died-two.jpeg)";
     clearMe();
     stopGameTouch();
+    startButtonLive();
     newCharacter.boredInterval = null;
     displayBoredom.textContent = "Boredom: 10";
     displayStatus.textContent = dynamicContent.messages.deathStatus;
     speech.textContent = dynamicContent.messages.bDeathMessage;
     header.textContent = dynamicContent.messages.playAgainMessage;
-    return newCharacter;
+    return newCharacter
 }
 function sleepDeath() {
     imageChange.style.backgroundImage = "url(/img/died-two.jpeg)";
     clearMe();
     stopGameTouch();
+    startButtonLive();
     newCharacter.sleepInterval = null;
     displaySleepiness.textContent = "Sleepiness: 10";
     displayStatus.textContent = dynamicContent.messages.deathStatus;
     speech.textContent = dynamicContent.messages.sDeathMessage;
     header.textContent = dynamicContent.messages.playAgainMessage;
-    return newCharacter;
+    return newCharacter
 }
+
+//secret win ending
+function loveWin() {
+    imageChange.style.backgroundImage = "url(/img/final-love-end.jpeg)";
+    clearMe();
+    stopGameTouch();
+    startButtonLive();
+    displayLove.textContent = "Love: 20";
+    displayStatus.textContent = dynamicContent.messages.aliveStatus;
+    speech.textContent = dynamicContent.messages.loveMessageFour;
+    header.textContent = dynamicContent.messages.playAgainMessage;
+    return newCharacter
+}
+
 
 //creating Tamagotchi Class
 class Tamagotchi {
-    constructor(name, age, hunger, boredom, sleepiness) {
+    constructor(name, age, hunger, boredom, sleepiness, love) {
         this.name = name;
         this.age = age;
         this.hunger = hunger;
         this.boredom = boredom;
         this.sleepiness = sleepiness;
+        this.love = love;
     }
     increaseHunger() { 
         imageChange.style.backgroundImage = "url(/img/main-face.png)";
@@ -273,11 +300,42 @@ class Tamagotchi {
             displaySleepiness.textContent = "Sleepiness: " + this.sleepiness
         }
     }
+    increaseLove() {
+        speech.textContent = dynamicContent.messages.midGameMessage;
+        imageChange.style.backgroundImage = "url(/img/main-face.png)";
+        this.love++ 
+        if (this.love === 5) {
+            displayLove.textContent = "Love: " + this.love 
+            imageChange.style.backgroundImage = "url(/img/luna-and-artemis.jpeg)";
+            speech.textContent = dynamicContent.messages.loveMessageOne;
+        } else if (this.love === 10) {
+            displayLove.textContent = "Love: " + this.love 
+            imageChange.style.backgroundImage = "url(/img/luna-and-artemis.jpeg)";
+            speech.textContent = dynamicContent.messages.loveMessageTwo; 
+        } else if (this.love === 15) {
+            displayLove.textContent = "Love: " + this.love 
+            imageChange.style.backgroundImage = "url(/img/luna-and-artemis.jpeg)";
+            speech.textContent = dynamicContent.messages.loveMessageThree;
+        } else if (this.love === 20) {
+            displayLove.textContent = "Love: " + this.love 
+            loveWin();
+        } else {
+            displayLove.textContent = "Love: " + this.love 
+        }
+    }
 }
 
 //addEventListeners
 window.addEventListener("load", createCharacter);
+
+function startButtonLive() {
 startButton.addEventListener("click", startGame);
+}
+
+function startButtonDead() {
+    startButton.removeEventListener("click", startGame);
+}
+
 //i only want these when game play is happening
 function startGameTouch() { 
     feedButton.addEventListener("click", feedPet);
@@ -315,6 +373,10 @@ let dynamicContent = {
         sleepMessageOne: "I'm sleepy.",
         sleepMessageTwo: "Can I take a nap?",
         sleepMessageThree: "Sleep, Me-OW!",
-        sleepMessageFour: "No, I'm not tired!"
+        sleepMessageFour: "No, I'm not tired!",
+        loveMessageOne: "Hmm, I wonder what that love counter is???",
+        loveMessageTwo: "Something good might happen if love gets higher?",
+        loveMessageThree: "You're getting closer....",
+        loveMessageFour: "You unlocked a secret ending and won!"
     }
 }
