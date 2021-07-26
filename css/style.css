@@ -137,11 +137,6 @@ h1 {
    left: 80px;
 }
 
-.button-position {
-    float: relative;
-   
-}
-
 #start {
     padding: 15px 40px 15px 40px;
     margin: 30px;
@@ -151,9 +146,10 @@ h1 {
     background: #F1F2C9;
     border: 6px inset #7EB0F2;
     border-radius: 15px;
+    float: right;
     position: absolute;
-    bottom: 60px;
-    right: 20px;  
+    bottom: 90px;
+    right: 15px;
 }
 
 #play, #feed, #sleep {
@@ -182,24 +178,28 @@ h1 {
         font-size: 2rem;
         padding: 20px;
         margin-left: 470px;
-        position: static;
     } 
     .stats {
         right: 60px;
         font-size: 1.1rem;
     }
+    .alt-display-messages {
+        left: -30px;
+    }
 }
 
 @media screen and (max-width: 400px) {
     * {
-        display: inline-block;
         position: static;
+        max-width: 100%;
+        float: none;
     }
+
     #welcome-message {
         font-size: 1.5rem;
     }
     .alt-display-messages {
-        float: none;
+    
     }
 
     .baby-speech-bubble, 
@@ -219,12 +219,25 @@ h1 {
         bottom: 0px;
     }
 
-    .tamagotchi-body {
+    /* .tamagotchi-body {
         height: 100px;
         width: 100px;
     }
+     */
+    .tamagotchi-screen {
+        max-width: 100%;
+    }
 
-    .game-buttons {
+    .stats {
+        font-size: .5rem;
+    }
+
+    #start,
+    #play,
+    #feed,
+    #sleep {
+        font-size: 1rem;
+        padding: 10px;
     }
 }
 
