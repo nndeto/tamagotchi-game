@@ -30,7 +30,7 @@ The user is the **Player**, who wants to have fun with their Tamagotchi pet.
 
 
 # Wireframes
-! [Tamagotchi Mockup](Tamagotchi-Mockup.png)
+![Tamagotchi Mockup](./img/Tamagotchi-Mockup.png)
 
 # Triumphs
 # Challenges

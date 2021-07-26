@@ -6,7 +6,6 @@ body {
     background-image: url("/img/background-choice.jpeg");
     background-repeat: none;
     background-size: cover;
-    /* text-align: center; */
 }
 
 .hidden {
@@ -104,7 +103,7 @@ h1 {
 }
 
 .tamagotchi-body {
-    height: 700px;
+    height: 650px;
     width: 500px;
     background: #7E82D9;
     border-radius: 50%;
@@ -138,6 +137,11 @@ h1 {
    left: 80px;
 }
 
+.button-position {
+    float: relative;
+   
+}
+
 #start {
     padding: 15px 40px 15px 40px;
     margin: 30px;
@@ -148,8 +152,8 @@ h1 {
     border: 6px inset #7EB0F2;
     border-radius: 15px;
     position: absolute;
-    bottom: 20px;
-    right: 30px;  
+    bottom: 60px;
+    right: 20px;  
 }
 
 #play, #feed, #sleep {
@@ -173,15 +177,54 @@ h1 {
     bottom: 80px;
 } 
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1200px) {
     #start {
         font-size: 2rem;
         padding: 20px;
-    }
+        margin-left: 470px;
+        position: static;
+    } 
     .stats {
-        height: 200px;
-        width: 200px;
         right: 60px;
         font-size: 1.1rem;
     }
 }
+
+@media screen and (max-width: 400px) {
+    * {
+        display: inline-block;
+        position: static;
+    }
+    #welcome-message {
+        font-size: 1.5rem;
+    }
+    .alt-display-messages {
+        float: none;
+    }
+
+    .baby-speech-bubble, 
+    .baby-speech-bubble {
+        visibility: hidden;
+    }
+
+    .speech-bubble {
+        height: 30px;
+        width: 30px;
+        font-size: .1rem;
+    }
+
+    .mascot {
+        height: 100px;
+        width: 100px;
+        bottom: 0px;
+    }
+
+    .tamagotchi-body {
+        height: 100px;
+        width: 100px;
+    }
+
+    .game-buttons {
+    }
+}
+
