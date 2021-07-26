@@ -27,17 +27,17 @@ const gameStatsVis = document.querySelector(".stats");
 
 
 //image change variables
-imageChange.style.backgroundImage = "url(/img/luna-eating.jpeg)";
-imageChange.style.backgroundImage = "url(/img/luna-playing.jpeg)";
-imageChange.style.backgroundImage = "url(/img/luna-sleeping.jpeg)";
-imageChange.style.backgroundImage = "url(/img/img/died-one.jpeg)";
-imageChange.style.backgroundImage = "url(/img/died-two.jpeg)";
-imageChange.style.backgroundImage = "url(/img/main-face.png)";
-imageChange.style.backgroundImage = "url(/img/luna-food-mad.jpeg)";
-imageChange.style.backgroundImage = "url(/img/luna-sleep-mad.jpeg)";
-imageChange.style.backgroundImage = "url(/img/luna-bored-mad.jpeg)";
-imageChange.style.backgroundImage = "url(/img/luna-and-artemis.jpeg)";
-imageChange.style.backgroundImage = "url(/img/final-love-end.jpeg)";
+imageChange.style.backgroundImage = "url(./img/luna-eating.jpeg)";
+imageChange.style.backgroundImage = "url(./img/luna-playing.jpeg)";
+imageChange.style.backgroundImage = "url(./img/luna-sleeping.jpeg)";
+imageChange.style.backgroundImage = "url(./img/img/died-one.jpeg)";
+imageChange.style.backgroundImage = "url(./img/died-two.jpeg)";
+imageChange.style.backgroundImage = "url(./img/main-face.png)";
+imageChange.style.backgroundImage = "url(./img/luna-food-mad.jpeg)";
+imageChange.style.backgroundImage = "url(./img/luna-sleep-mad.jpeg)";
+imageChange.style.backgroundImage = "url(./img/luna-bored-mad.jpeg)";
+imageChange.style.backgroundImage = "url(./img/luna-and-artemis.jpeg)";
+imageChange.style.backgroundImage = "url(./img/final-love-end.jpeg)";
 
 //creating global functions
 //prompts user to choose a name
@@ -95,7 +95,7 @@ function hideGame() {
 //this function starts my interval timers and displays stats
 function startGame() {
     header.textContent = `Meow, my name is ${newCharacter.name}!`
-    imageChange.style.backgroundImage = "url(/img/main-face.png)";
+    imageChange.style.backgroundImage = "url(./img/main-face.png)";
     speech.textContent = dynamicContent.messages.staticMessage;
     displayGame();
     resetMe();
@@ -147,7 +147,7 @@ function clearMe() {
 }
 
 function hungerDeath() {
-    imageChange.style.backgroundImage = "url(/img/died-two.jpeg)";
+    imageChange.style.backgroundImage = "url(./img/died-two.jpeg)";
     clearMe();
     stopGameTouch();
     startButtonLive();
@@ -159,7 +159,7 @@ function hungerDeath() {
     return newCharacter
 }
 function boredDeath() {
-    imageChange.style.backgroundImage = "url(/img/died-two.jpeg)";
+    imageChange.style.backgroundImage = "url(./img/died-two.jpeg)";
     clearMe();
     stopGameTouch();
     startButtonLive();
@@ -171,7 +171,7 @@ function boredDeath() {
     return newCharacter
 }
 function sleepDeath() {
-    imageChange.style.backgroundImage = "url(/img/died-two.jpeg)";
+    imageChange.style.backgroundImage = "url(./img/died-two.jpeg)";
     clearMe();
     stopGameTouch();
     startButtonLive();
@@ -185,7 +185,7 @@ function sleepDeath() {
 
 //secret win ending
 function loveWin() {
-    imageChange.style.backgroundImage = "url(/img/final-love-end.jpeg)";
+    imageChange.style.backgroundImage = "url(./img/final-love-end.jpeg)";
     clearMe();
     stopGameTouch();
     startButtonLive();
@@ -208,7 +208,7 @@ class Tamagotchi {
         this.love = love;
     }
     increaseHunger() { 
-        imageChange.style.backgroundImage = "url(/img/main-face.png)";
+        imageChange.style.backgroundImage = "url(./img/main-face.png)";
         speech.textContent = dynamicContent.messages.midGameMessage;
         this.hunger++
         if (this.hunger === 3) {
@@ -230,17 +230,17 @@ class Tamagotchi {
     decreaseHunger() {
        if (this.hunger === 1) {
         speech.textContent = dynamicContent.messages.hungerMessageFour;
-        imageChange.style.backgroundImage = "url(/img/luna-food-mad.jpeg)";
+        imageChange.style.backgroundImage = "url(./img/luna-food-mad.jpeg)";
         return 
         } else {
         this.hunger--
-        imageChange.style.backgroundImage = "url(/img/luna-eating.jpeg)";
+        imageChange.style.backgroundImage = "url(./img/luna-eating.jpeg)";
         displayHunger.textContent = "Hunger: " + this.hunger
         }
     }
     increaseBoredom() {
         speech.textContent = dynamicContent.messages.midGameMessage;
-        imageChange.style.backgroundImage = "url(/img/main-face.png)";
+        imageChange.style.backgroundImage = "url(./img/main-face.png)";
         this.boredom++
         if (this.boredom === 3) {
             displayBoredom.textContent = "Boredom: " + this.boredom 
@@ -261,17 +261,17 @@ class Tamagotchi {
     decreaseBoredom() {
         if (this.boredom === 1) {
             speech.textContent = dynamicContent.messages.boredMessageFour;
-            imageChange.style.backgroundImage = "url(/img/luna-bored-mad.jpeg)";
+            imageChange.style.backgroundImage = "url(./img/luna-bored-mad.jpeg)";
             return
         } else {
             this.boredom--
-            imageChange.style.backgroundImage = "url(/img/luna-playing.jpeg)";
+            imageChange.style.backgroundImage = "url(./img/luna-playing.jpeg)";
             displayBoredom.textContent = "Boredom: " + this.boredom
         }
     }
     increaseSleepiness() {
         speech.textContent = dynamicContent.messages.midGameMessage;
-        imageChange.style.backgroundImage = "url(/img/main-face.png)";
+        imageChange.style.backgroundImage = "url(./img/main-face.png)";
         this.sleepiness++
         if (this.sleepiness === 3) {
             displaySleepiness.textContent = "Sleep: " + this.sleepiness 
@@ -292,29 +292,29 @@ class Tamagotchi {
     decreaseSleepiness() {
         if (this.sleepiness === 1) {
             speech.textContent = dynamicContent.messages.sleepMessageFour;
-            imageChange.style.backgroundImage = "url(/img/luna-sleep-mad.jpeg)";
+            imageChange.style.backgroundImage = "url(./img/luna-sleep-mad.jpeg)";
             return
         } else {
             this.sleepiness--
-            imageChange.style.backgroundImage = "url(/img/luna-sleeping.jpeg)";
+            imageChange.style.backgroundImage = "url(./img/luna-sleeping.jpeg)";
             displaySleepiness.textContent = "Sleepiness: " + this.sleepiness
         }
     }
     increaseLove() {
         speech.textContent = dynamicContent.messages.midGameMessage;
-        imageChange.style.backgroundImage = "url(/img/main-face.png)";
+        imageChange.style.backgroundImage = "url(./img/main-face.png)";
         this.love++ 
         if (this.love === 5) {
             displayLove.textContent = "Love: " + this.love 
-            imageChange.style.backgroundImage = "url(/img/luna-and-artemis.jpeg)";
+            imageChange.style.backgroundImage = "url(./img/luna-and-artemis.jpeg)";
             speech.textContent = dynamicContent.messages.loveMessageOne;
         } else if (this.love === 10) {
             displayLove.textContent = "Love: " + this.love 
-            imageChange.style.backgroundImage = "url(/img/luna-and-artemis.jpeg)";
+            imageChange.style.backgroundImage = "url(./img/luna-and-artemis.jpeg)";
             speech.textContent = dynamicContent.messages.loveMessageTwo; 
         } else if (this.love === 15) {
             displayLove.textContent = "Love: " + this.love 
-            imageChange.style.backgroundImage = "url(/img/luna-and-artemis.jpeg)";
+            imageChange.style.backgroundImage = "url(./img/luna-and-artemis.jpeg)";
             speech.textContent = dynamicContent.messages.loveMessageThree;
         } else if (this.love === 20) {
             displayLove.textContent = "Love: " + this.love 
