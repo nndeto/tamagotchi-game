@@ -62,7 +62,6 @@ function generateCharacter() {
 }
 
 //age my character
-//i eventually want a message to alert birthday
 function ageMe() {
     ageInterval = setInterval(function() {
         newCharacter.age++;
