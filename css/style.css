@@ -93,7 +93,7 @@ h1 {
 
 .stats:hover {
     animation-name: rainbow;
-    animation-duration: 6s;
+    animation-duration: 4s;
     animation-iteration-count: infinite;
 }
 
@@ -117,7 +117,7 @@ h1 {
     height: 250px;
     width: 400px;
     background-color: #7EB0F2;
-    background-image: url("/img/main-face.png");
+    background-image: url("../img/main-face.png");
     background-size: fill;
     background-repeat: no-repeat;
     background-position: center;
@@ -187,57 +187,3 @@ h1 {
         left: -30px;
     }
 }
-
-@media screen and (max-width: 400px) {
-    * {
-        position: static;
-        max-width: 100%;
-        float: none;
-    }
-
-    #welcome-message {
-        font-size: 1.5rem;
-    }
-    .alt-display-messages {
-    
-    }
-
-    .baby-speech-bubble, 
-    .baby-speech-bubble {
-        visibility: hidden;
-    }
-
-    .speech-bubble {
-        height: 30px;
-        width: 30px;
-        font-size: .1rem;
-    }
-
-    .mascot {
-        height: 100px;
-        width: 100px;
-        bottom: 0px;
-    }
-
-    /* .tamagotchi-body {
-        height: 100px;
-        width: 100px;
-    }
-     */
-    .tamagotchi-screen {
-        max-width: 100%;
-    }
-
-    .stats {
-        font-size: .5rem;
-    }
-
-    #start,
-    #play,
-    #feed,
-    #sleep {
-        font-size: 1rem;
-        padding: 10px;
-    }
-}
-
