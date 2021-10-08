@@ -25,20 +25,6 @@ const speech = document.querySelector(".speech-bubble");
 const gameVis = document.querySelector(".tamagotchi-body");
 const gameStatsVis = document.querySelector(".stats");
 
-
-//image change variables
-imageChange.style.backgroundImage = "url(./img/luna-eating.jpeg)";
-imageChange.style.backgroundImage = "url(./img/luna-playing.jpeg)";
-imageChange.style.backgroundImage = "url(./img/luna-sleeping.jpeg)";
-imageChange.style.backgroundImage = "url(./img/img/died-one.jpeg)";
-imageChange.style.backgroundImage = "url(./img/died-two.jpeg)";
-imageChange.style.backgroundImage = "url(./img/main-face.png)";
-imageChange.style.backgroundImage = "url(./img/luna-food-mad.jpeg)";
-imageChange.style.backgroundImage = "url(./img/luna-sleep-mad.jpeg)";
-imageChange.style.backgroundImage = "url(./img/luna-bored-mad.jpeg)";
-imageChange.style.backgroundImage = "url(./img/luna-and-artemis.jpeg)";
-imageChange.style.backgroundImage = "url(./img/final-love-end.jpeg)";
-
 //creating global functions
 //prompts user to choose a name
 function pickName() {
@@ -114,7 +100,7 @@ function startGame() {
     }, 11000)
     loveInterval = setInterval(function() {
         newCharacter.increaseLove();
-    }, 19000)
+    }, 13000)
 }
 
 //resets my other properties once a death requires a new game
@@ -378,5 +364,9 @@ let dynamicContent = {
         loveMessageTwo: "Something good might happen if love gets higher?",
         loveMessageThree: "You're getting closer....",
         loveMessageFour: "You unlocked a secret ending and won!"
-    }
+    },
+    //goal to come back and make image change items dynamic
+    // images: {
+
+    // }
 }
